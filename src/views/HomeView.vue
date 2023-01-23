@@ -1,7 +1,6 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to La tienda de Yoli"/>
+    <HelloWorld msg="Bienvenid@ a La tienda de Yoli"/>
   </div>
 </template>
 
@@ -16,3 +15,11 @@ export default defineComponent({
   },
 });
 </script>
+  
+<style>
+.hone {
+  background-image: src='../assets/green-grunge-paper-background.jpg';
+  color: aliceblue;
+
+}
+</style>
