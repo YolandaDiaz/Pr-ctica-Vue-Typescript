@@ -1,5 +1,21 @@
 <template>
-    <div class="about">
-      <h1>Perfil</h1>
-    </div>
-  </template>
+  <div>
+    <Links></Links>
+    <HelloWorld msg="Perfil"/>
+  </div>
+  
+</template>
+
+<script lang="ts">
+  import { defineComponent } from 'vue';
+  import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
+  import Links from '@/components/Links.vue';
+
+  export default defineComponent({
+    name: 'ProfileView',
+    components: {
+      HelloWorld,
+      Links
+    },
+  });
+</script>
