@@ -1,43 +1,52 @@
 <template>
   <div>
-    <HelloWorld msg="Bienvenid@ a la tienda de Yoli"/>
+    <HelloWorld msg="Bienvenid@ a la tienda de Yoli" />
   </div>
   <div class="login">
-    <h3>
-    Lógate para acceder a la tienda
-    </h3>
+    <h3>Lógate para acceder a la tienda</h3>
     <form action="" class="form">
       <label class="form-label" for="#email">Email:</label>
-      <input class="form-input" type="email" id="email" required placeholder="Introduce tu email">
+      <input
+        class="form-input"
+        type="email"
+        id="email"
+        required
+        placeholder="Introduce tu email"
+      />
       <label class="form-label" for="#password">Password:</label>
-      <input class="form-input" type="password" id="password" required placeholder="Password">
-      <p v-if="error" class="error">No has introducido bien el email o la contraseña.</p>
-      <input class="form-submit" type="submit" value="Acceder">
+      <input
+        class="form-input"
+        type="password"
+        id="password"
+        required
+        pattern="^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{6,12}$"
+        placeholder="Introduce tu contraseña"
+      />
+      <input class="form-submit" type="submit" value="Acceder" />
     </form>
   </div>
-    
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
+import axios from "axios";
+import { defineComponent } from "vue";
+import HelloWorld from "@/components/HelloWorld.vue";
 
 export default defineComponent({
-  name: 'HomeView',
+  name: "HomeView",
   components: {
     HelloWorld,
   },
 });
-
 </script>
-  
+
 <style scoped>
 .login {
   padding: 2rem;
 }
 h3 {
   text-align: center;
-  color:  rgba(13, 122, 13, 0.651);
+  color: rgba(13, 122, 13, 0.651);
 }
 .form {
   margin: 3rem auto;
@@ -74,6 +83,6 @@ h3 {
   transition: 0.2s;
 }
 .form-submit :hover {
-    background: #0b9170;
+  background: #0b9170;
 }
 </style>
