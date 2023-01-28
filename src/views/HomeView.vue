@@ -7,6 +7,7 @@
     <form action="" class="form">
       <label class="form-label" for="#email">Email:</label>
       <input
+        v-model="email"
         class="form-input"
         type="email"
         id="email"
@@ -15,6 +16,7 @@
       />
       <label class="form-label" for="#password">Password:</label>
       <input
+        v-model="password"
         class="form-input"
         type="password"
         id="password"
@@ -28,16 +30,24 @@
 </template>
 
 <script lang="ts">
-import axios from "axios";
-import { defineComponent } from "vue";
-import HelloWorld from "@/components/HelloWorld.vue";
+  //import axios from "axios";
+  import { defineComponent, ref } from "vue";
+  import HelloWorld from "@/components/HelloWorld.vue";
 
-export default defineComponent({
-  name: "HomeView",
-  components: {
-    HelloWorld,
-  },
-});
+  export default defineComponent({
+    name: "HomeView",
+    components: {
+      HelloWorld,
+    },
+    setup() {
+      const email = ref<string>('')
+      const password = ref<string>('')
+      return {
+        email, password
+      }
+    }
+  });
+  
 </script>
 
 <style scoped>

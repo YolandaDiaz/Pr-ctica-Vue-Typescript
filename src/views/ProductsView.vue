@@ -4,15 +4,19 @@
     <Links></Links>
     <HelloWorld msg="Listado de productos" />
   </div>
+  <div class="prods">
+    <a v-for="product in products" :key="product.id">{{ product.title }}</a>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import HelloWorld from "@/components/HelloWorld.vue";
 import Links from "@/components/Links.vue";
-import YoliApi from "@/api/YoliApi";
-import { Product } from "../models/products";
-import { AxiosResponse } from "axios";
+//import YoliApi from "@/api/YoliApi";
+//import { Product } from "../models/products";
+//import { AxiosResponse } from "axios";
+import useProducts from "@/composables/useProducts";
 
 export default defineComponent({
   name: "ProductsView",
@@ -28,10 +32,9 @@ export default defineComponent({
     userRole: String,
   },
   setup() {
-    YoliApi.get<unknown, AxiosResponse<Product[]>>("/products").then((resp) =>
-      console.log(resp.data)
-    );
-    return {};
+    const { products, fetchProducts } = useProducts();
+    fetchProducts();
+    return { products };
   },
 });
 </script>

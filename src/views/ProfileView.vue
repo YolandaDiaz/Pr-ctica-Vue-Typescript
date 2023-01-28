@@ -19,6 +19,7 @@ import Links from "@/components/Links.vue";
 import YoliApi from "@/api/YoliApi";
 import { User } from "../models/user";
 import { AxiosResponse } from "axios";
+import { useStore } from "vuex";
 
 export default defineComponent({
   name: "ProfileView",
@@ -34,6 +35,8 @@ export default defineComponent({
     userRole: String,
   },
   setup(props) {
+    const store = useStore();
+    store.state;
     let user = ref<User>();
     YoliApi.get<unknown, AxiosResponse<User>>(`/users/${props.id}`).then(
       (resp) => (user.value = resp.data)

@@ -6,6 +6,7 @@
   <div v-if="product">
     <h1>Producto: {{ product?.id }}</h1>
     <h2>Role: {{ userRole }}</h2>
+    <h2>{{ product?.images }}</h2>
     <h2>Nombre: {{ product?.title }}</h2>
   </div>
   <div v-else>Cargando...</div>
@@ -34,7 +35,7 @@ export default defineComponent({
   },
   setup(props) {
     let product = ref<Product>();
-    YoliApi.get<unknown, AxiosResponse<Product>>(`/products/${props.id}`).then(
+    YoliApi.get<unknown, AxiosResponse<Product>>(`/products/21`).then(
       (resp) => (product.value = resp.data)
     );
     return { product };
