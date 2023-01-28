@@ -1,4 +1,3 @@
-<!-- eslint-disable @typescript-eslint/no-explicit-any -->
 <template>
   <div>
     <Links></Links>
@@ -24,6 +23,8 @@ import { Product } from "../models/products";
 //import { AxiosResponse } from "axios";
 import useProducts from "@/composables/useProducts";
 import { useRouter } from "vue-router";
+//import { useStore } from "vuex";
+import store from "@/store";
 
 export default defineComponent({
   name: "ProductsView",
@@ -40,6 +41,7 @@ export default defineComponent({
     userRole: String,
   },
   setup() {
+    store.state;
     const { products, fetchProducts } = useProducts();
     const router = useRouter();
     fetchProducts();
@@ -51,3 +53,12 @@ export default defineComponent({
   },
 });
 </script>
+
+<style scoped>
+.prods-list {
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+  gap: 1rem 1rem;
+}
+</style>

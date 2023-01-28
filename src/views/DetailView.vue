@@ -1,30 +1,29 @@
 <template>
-  <div>
-    <Links></Links>
-    <HelloWorld msg="Detalle del producto" />
+  <Links></Links>
+  <HelloWorld msg="Detalle del producto" />
+  <div class="prod-detail">
+    <h1>Producto: {{ product.title }}</h1>
+    <div class="picture">
+      <img :src="product.images[0]" class="card-img" alt="" />
+    </div>
+    <div class="product-description">{{ product.description }}</div>
+    <h2>Precio: {{ product.price }} €</h2>
   </div>
-  <div v-if="product">
-    <h1>Producto: {{ product?.id }}</h1>
-    <h2>Role: {{ userRole }}</h2>
-    <h2>{{ product?.images }}</h2>
-    <h2>Nombre: {{ product?.title }}</h2>
-  </div>
-  <div v-else>Cargando...</div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent } from "vue";
 import HelloWorld from "@/components/HelloWorld.vue";
 import Links from "@/components/Links.vue";
-import YoliApi from "@/api/YoliApi";
-import { Product } from "../models/products";
-import { AxiosResponse } from "axios";
+import useProducts from "@/composables/useProducts";
+//import detailCard from "@/components/detailCard.vue";
 
 export default defineComponent({
   name: "DetailView",
   components: {
     HelloWorld,
     Links,
+    //detailCard,
   },
   props: {
     id: {
@@ -34,11 +33,27 @@ export default defineComponent({
     userRole: String,
   },
   setup(props) {
-    let product = ref<Product>();
-    YoliApi.get<unknown, AxiosResponse<Product>>(`/products/21`).then(
-      (resp) => (product.value = resp.data)
-    );
+    const { product, fetchProductsById } = useProducts();
+    fetchProductsById(props.id);
     return { product };
   },
 });
 </script>
+
+<style scoped>
+.prod-detail {
+  width: 100%;
+  display: flex;
+  text-align: center;
+  border: 1px dotted black;
+  border-radius: 10px;
+}
+.picture {
+  width: 100%;
+  height: 100%;
+}
+
+.card-title {
+  color: chocolate;
+}
+</style>

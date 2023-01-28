@@ -7,12 +7,13 @@ const useProducts = () => {
   return {
     // GETTERS
     products: computed(() => store.getters["products/getProducts"]),
+    isLoading: computed(() => store.getters["products/getIsLoading"]),
     product: computed(() => store.getters["products/getProduct"]),
 
     // ACTIONS
     fetchProducts: () => store.dispatch("products/fetchProducts"),
-    fetchProductById: (productId: number) =>
-      store.dispatch("products/fetchProductById", productId),
+    fetchProductsById: (productId: number) =>
+      store.dispatch("products/fetchProductsById", productId),
   };
 };
 

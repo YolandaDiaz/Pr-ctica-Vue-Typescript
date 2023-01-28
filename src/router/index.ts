@@ -18,10 +18,15 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import(/* webpackChunkName: "profile" */ '../views/ProfileView.vue')
   },
   {
-    path: '/detail',
+    path: '/detail/:id',
     name: 'detail',
-    component: () => import(/* webpackChunkName: "detail" */ '../views/DetailView.vue')
-  }
+    component: () => import(/* webpackChunkName: "detail" */ '../views/DetailView.vue'),
+    props: (route) => {
+      const id = Number(route.params.id);
+      const userRole = localStorage.getItem("userRole");
+      return isNaN(id) ? { id: null, userRole } : { id, userRole };
+    },
+  },
 ]
 
 const router = createRouter({

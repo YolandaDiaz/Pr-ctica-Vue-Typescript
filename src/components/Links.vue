@@ -1,8 +1,7 @@
 <template>
   <nav>
     <router-link :to="{ name: 'products' }">Listado de productos</router-link> |
-    <router-link :to="{ name: 'profile', params: { id: 1 } }">Perfil</router-link> |
-    <router-link :to="{ name: 'detail', params: { id: 1 } }">Detail</router-link> |
+    <router-link :to="{ name: 'profile' }">Perfil</router-link> |
     <a href="../App.vue" class="button"> 🔓 Logout</a>
   </nav>
   <!---<a href="#" @click="removeSelectedUser">Delete</a>--->
