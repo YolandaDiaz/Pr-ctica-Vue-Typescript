@@ -4,8 +4,13 @@
     <Links></Links>
     <HelloWorld msg="Listado de productos" />
   </div>
-  <div class="prods">
-    <a v-for="product in products" :key="product.id">{{ product.title }}</a>
+  <div class="prods-list">
+    <productItem
+      v-for="product in products"
+      :key="product.id"
+      :product="product"
+      @goDetail="goDetail"
+    />
   </div>
 </template>
 
@@ -13,16 +18,19 @@
 import { defineComponent } from "vue";
 import HelloWorld from "@/components/HelloWorld.vue";
 import Links from "@/components/Links.vue";
+import productItem from "@/components/productItem.vue";
 //import YoliApi from "@/api/YoliApi";
-//import { Product } from "../models/products";
+import { Product } from "../models/products";
 //import { AxiosResponse } from "axios";
 import useProducts from "@/composables/useProducts";
+import { useRouter } from "vue-router";
 
 export default defineComponent({
   name: "ProductsView",
   components: {
     HelloWorld,
     Links,
+    productItem,
   },
   props: {
     id: {
@@ -33,8 +41,13 @@ export default defineComponent({
   },
   setup() {
     const { products, fetchProducts } = useProducts();
+    const router = useRouter();
     fetchProducts();
-    return { products };
+    return {
+      products,
+      goDetail: (product: Product) =>
+        router.push({ name: "detail", params: { id: product.id } }),
+    };
   },
 });
 </script>
