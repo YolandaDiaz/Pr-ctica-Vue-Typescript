@@ -24,7 +24,7 @@
       @goDetail="goDetail"
     />
   </div>
-  <div> <FooterGracias></FooterGracias> </div>
+  <div><FooterGracias></FooterGracias></div>
 </template>
 
 <script lang="ts">
@@ -46,8 +46,8 @@ export default defineComponent({
     HelloWorld,
     Links,
     ProductItem,
-    FooterGracias
-},
+    FooterGracias,
+  },
   props: {
     id: {
       type: Number,

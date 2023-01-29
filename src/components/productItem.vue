@@ -32,6 +32,7 @@ export default defineComponent({
   display: flex;
   border: 2.5px dotted rgba(18, 48, 7, 0.418);
   border-radius: 10px;
+  background-color: rgb(245, 244, 242);
 }
 
 .product-images {
