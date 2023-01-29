@@ -16,10 +16,11 @@ export default defineComponent({
 
 <style scoped>
 .card {
-  width: 30rem;
+  margin: 2% 0 2% 5%;
+  width: 90%;
   min-height: 200px;
-  border: 1px solid rgb(145, 85, 6);
-  border-radius: 1, 5rem;
+  border: 2px dotted rgb(145, 85, 6);
+  border-radius: 1.5rem;
   box-shadow: 0px 10px 10px rgba(8, 128, 24, 0.582);
 }
 </style>

@@ -3,29 +3,37 @@
     <Links></Links>
     <HelloWorld msg="Perfil" />
   </div>
-  <div v-if="user">
-    <h1>Nombre: {{ user.name }}</h1>
-    <h2>Email: {{ user.email }}</h2>
-    <img :src="user.avatar" alt="" />
-    <h2>Role: {{ userRole }}</h2>
-  </div>
-  <div v-else>Cargando...</div>
+  <detailCard>
+    <template v-slot:header>
+      <h2 class="card-title">Nombre: {{ user.name }}</h2>
+    </template>
+    <template v-slot:image>
+      <div class="picture">
+        <img :src="user.avatar" class="card-img" alt="" />
+      </div>
+    </template>
+    <template v-slot:body>
+      <p class="card-text">>Role: {{ userRole }}</p>
+    </template>
+    <template v-slot:footer>
+      <h2>Email: {{ user.email }}</h2>
+    </template>
+  </detailCard>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent } from "vue";
 import HelloWorld from "@/components/HelloWorld.vue";
 import Links from "@/components/Links.vue";
-import YoliApi from "@/api/YoliApi";
-import { User } from "../models/user";
-import { AxiosResponse } from "axios";
-import { useStore } from "vuex";
+import useUsers from "@/composables/useUsers";
+import detailCard from "@/components/detailCard.vue";
 
 export default defineComponent({
   name: "ProfileView",
   components: {
     HelloWorld,
     Links,
+    detailCard,
   },
   props: {
     id: {
@@ -35,13 +43,18 @@ export default defineComponent({
     userRole: String,
   },
   setup(props) {
-    const store = useStore();
-    store.state;
-    let user = ref<User>();
-    YoliApi.get<unknown, AxiosResponse<User>>(`/users/${props.id}`).then(
-      (resp) => (user.value = resp.data)
-    );
+    const { user, fetchUserById } = useUsers();
+    fetchUserById(props.id);
     return { user };
   },
 });
 </script>
+
+<style scoped>
+h2 {
+  color: #0b9b5a;
+}
+.card-text {
+  padding: 5%s;
+}
+</style>

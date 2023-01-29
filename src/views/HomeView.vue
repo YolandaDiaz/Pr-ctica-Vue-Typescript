@@ -21,33 +21,49 @@
         type="password"
         id="password"
         required
-        pattern="^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{6,12}$"
         placeholder="Introduce tu contraseña"
       />
-      <input class="form-submit" type="submit" value="Acceder" />
+      <input class="form-submit" type="submit" value="Acceder" @goLogin="goLogin" />
     </form>
   </div>
 </template>
 
 <script lang="ts">
-  //import axios from "axios";
-  import { defineComponent, ref } from "vue";
-  import HelloWorld from "@/components/HelloWorld.vue";
+import { defineComponent, ref } from "vue";
+import HelloWorld from "@/components/HelloWorld.vue";
+import { useRouter } from "vue-router";
+import { User } from "@/models/user";
+import useUsers from "@/composables/useUsers";
 
-  export default defineComponent({
-    name: "HomeView",
-    components: {
-      HelloWorld,
+export default defineComponent({
+  name: "HomeView",
+  components: {
+    HelloWorld,
+  },
+  props: {
+    id: {
+      type: Number,
+      required: true,
     },
-    setup() {
-      const email = ref<string>('')
-      const password = ref<string>('')
-      return {
-        email, password
-      }
-    }
-  });
-  
+    userRole: String,
+  },
+
+  setup() {
+    const { users} = useUsers();
+    const router = useRouter();
+    const email = ref<string>("");
+    const password = ref<string>("");
+    //fetchUsers();
+    
+    return {
+      users,
+      email,
+      password,
+      goLogin: (user: User) =>
+        router.push({ name: "profile", params: { iduser: user.id } }),
+    };
+  },
+});
 </script>
 
 <style scoped>

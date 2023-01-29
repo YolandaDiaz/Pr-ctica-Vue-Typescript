@@ -2,14 +2,14 @@ import { Product } from './../../models/products';
 
 export interface IProductsState {
   products: Product[];
-  isLoading: boolean;
+  //isLoading: boolean;
   selectedProduct: Product | null;
 }
 
 function state(): IProductsState {
   return {
     products: [],
-    isLoading: false,
+    //isLoading: false,
     selectedProduct: null,
   }
 }

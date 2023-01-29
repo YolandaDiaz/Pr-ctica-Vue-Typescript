@@ -1,14 +1,24 @@
 <template>
   <Links></Links>
   <HelloWorld msg="Detalle del producto" />
-  <div class="prod-detail">
-    <h1>Producto: {{ product.title }}</h1>
-    <div class="picture">
-      <img :src="product.images[0]" class="card-img" alt="" />
-    </div>
-    <div class="product-description">{{ product.description }}</div>
-    <h2>Precio: {{ product.price }} €</h2>
-  </div>
+  <detailCard>
+    <template v-slot:header>
+      <h2 class="card-title">Producto: {{ product.title }}</h2>
+    </template>
+    <template v-slot:image>
+      <div class="picture">
+        <img :src="product.images[0]" class="card-img" alt="" />
+        <img :src="product.images[1]" class="card-img" alt="" />
+        <img :src="product.images[2]" class="card-img" alt="" />
+      </div>
+    </template>
+    <template v-slot:body>
+      <p class="card-text">{{ product.description }}</p>
+    </template>
+    <template v-slot:footer>
+      <h2>Precio: {{ product.price }} €</h2>
+    </template>
+  </detailCard>
 </template>
 
 <script lang="ts">
@@ -16,21 +26,21 @@ import { defineComponent } from "vue";
 import HelloWorld from "@/components/HelloWorld.vue";
 import Links from "@/components/Links.vue";
 import useProducts from "@/composables/useProducts";
-//import detailCard from "@/components/detailCard.vue";
+import detailCard from "@/components/detailCard.vue";
 
 export default defineComponent({
   name: "DetailView",
   components: {
     HelloWorld,
     Links,
-    //detailCard,
+    detailCard,
   },
   props: {
     id: {
       type: Number,
       required: true,
     },
-    userRole: String,
+    productRole: String,
   },
   setup(props) {
     const { product, fetchProductsById } = useProducts();
@@ -41,19 +51,23 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.prod-detail {
-  width: 100%;
-  display: flex;
-  text-align: center;
-  border: 1px dotted black;
-  border-radius: 10px;
+h2 {
+  padding: 2%;
+  color: #0b9b5a;
+}
+.card-text {
+  padding: 5%s;
 }
 .picture {
-  width: 100%;
-  height: 100%;
+  scroll-snap-type: x mandatory;
+  display: flex;
+  margin: 2% 10% 2% 10%;
+  overflow-x: scroll;
 }
-
-.card-title {
-  color: chocolate;
+.picture img {
+  flex: 0 0 100%;
+  width: 100%;
+  object-fit: cover;
+  scroll-snap-align: center;
 }
 </style>

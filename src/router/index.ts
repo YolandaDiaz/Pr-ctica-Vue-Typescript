@@ -15,7 +15,12 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/profile',
     name: 'profile',
-    component: () => import(/* webpackChunkName: "profile" */ '../views/ProfileView.vue')
+    component: () => import(/* webpackChunkName: "profile" */ '../views/ProfileView.vue'),
+    //props: (route) => {
+    //  const iduser = Number(route.params.id);
+    //  const userRole = localStorage.getItem("userRole");
+    //  return isNaN(iduser) ? { iduser: null, userRole } : { iduser, userRole };
+    //}, 
   },
   {
     path: '/detail/:id',
@@ -23,8 +28,8 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import(/* webpackChunkName: "detail" */ '../views/DetailView.vue'),
     props: (route) => {
       const id = Number(route.params.id);
-      const userRole = localStorage.getItem("userRole");
-      return isNaN(id) ? { id: null, userRole } : { id, userRole };
+      const productRole = localStorage.getItem("productRole");
+      return isNaN(id) ? { id: null, productRole } : { id, productRole };
     },
   },
 ]

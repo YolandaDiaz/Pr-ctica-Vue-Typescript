@@ -38,7 +38,7 @@ export default defineComponent({
       type: Number,
       required: true,
     },
-    userRole: String,
+    productRole: String,
   },
   setup() {
     store.state;
@@ -58,7 +58,8 @@ export default defineComponent({
 .prods-list {
   display: flex;
   flex-flow: row wrap;
-  width: 100%;
   gap: 1rem 1rem;
+  margin: 1% 2% 0 2%;
+  width: 100%;
 }
 </style>
