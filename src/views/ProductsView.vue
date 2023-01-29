@@ -3,24 +3,38 @@
     <Links></Links>
     <HelloWorld msg="Listado de productos" />
   </div>
+  <!---<form @submit.prevent="submitSearch">
+    <div class="input-group search-form">
+      <input
+        v-model="searchQuery"
+        type="search"
+        class="form-control rounded"
+        placeholder="Introduce tu búsqueda"
+        aria-label="search"
+        aria-describedby="search-addon"
+      />
+      <button type="button" class="btn btn-dark">Buscar</button>
+    </div>
+  </form>--->
   <div class="prods-list">
-    <productItem
+    <ProductItem
       v-for="product in products"
       :key="product.id"
       :product="product"
       @goDetail="goDetail"
     />
   </div>
+  <div> <FooterGracias></FooterGracias> </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import HelloWorld from "@/components/HelloWorld.vue";
 import Links from "@/components/Links.vue";
-import productItem from "@/components/productItem.vue";
-//import YoliApi from "@/api/YoliApi";
+import FooterGracias from "@/components/FooterGracias.vue";
+import ProductItem from "@/components/ProductItem.vue";
 import { Product } from "../models/products";
-//import { AxiosResponse } from "axios";
+//import axios from "axios";
 import useProducts from "@/composables/useProducts";
 import { useRouter } from "vue-router";
 //import { useStore } from "vuex";
@@ -31,8 +45,9 @@ export default defineComponent({
   components: {
     HelloWorld,
     Links,
-    productItem,
-  },
+    ProductItem,
+    FooterGracias
+},
   props: {
     id: {
       type: Number,

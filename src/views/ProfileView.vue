@@ -3,7 +3,7 @@
     <Links></Links>
     <HelloWorld msg="Perfil" />
   </div>
-  <detailCard>
+  <DetailCard>
     <template v-slot:header>
       <h2 class="card-title">Nombre: {{ user.name }}</h2>
     </template>
@@ -18,22 +18,27 @@
     <template v-slot:footer>
       <h2>Email: {{ user.email }}</h2>
     </template>
-  </detailCard>
+  </DetailCard>
+  <div>
+    <FooterGracias></FooterGracias>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import HelloWorld from "@/components/HelloWorld.vue";
 import Links from "@/components/Links.vue";
+import FooterGracias from "@/components/FooterGracias.vue";
 import useUsers from "@/composables/useUsers";
-import detailCard from "@/components/detailCard.vue";
+import DetailCard from "@/components/DetailCard.vue";
 
 export default defineComponent({
   name: "ProfileView",
   components: {
     HelloWorld,
     Links,
-    detailCard,
+    DetailCard,
+    FooterGracias,
   },
   props: {
     id: {

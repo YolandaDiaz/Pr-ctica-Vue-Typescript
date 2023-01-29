@@ -20,6 +20,10 @@ const actions: ActionTree<IProductsState, IState> = {
     //commit("setIsLoading", false);
     commit("setSelectedProduct", data);
   },
+  async fetchSerachProducts({commit}) {
+    const { data } = await YoliApi.get<unknown, AxiosResponse<Product[]>>(`/products/ + search`);
+    commit(`setsearchedProducts`, data);
+  }
 };
 
 export default actions;

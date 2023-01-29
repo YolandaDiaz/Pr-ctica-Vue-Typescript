@@ -4,6 +4,7 @@ export interface IProductsState {
   products: Product[];
   //isLoading: boolean;
   selectedProduct: Product | null;
+  searchedProducts: Product[];
 }
 
 function state(): IProductsState {
@@ -11,6 +12,7 @@ function state(): IProductsState {
     products: [],
     //isLoading: false,
     selectedProduct: null,
+    searchedProducts: [],
   }
 }
 

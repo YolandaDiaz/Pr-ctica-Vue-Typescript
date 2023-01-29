@@ -7,7 +7,7 @@ const useProducts = () => {
   return {
     // GETTERS
     products: computed(() => store.getters["products/getProducts"]),
-    isLoading: computed(() => store.getters["products/getIsLoading"]),
+    //isLoading: computed(() => store.getters["products/getIsLoading"]),
     product: computed(() => store.getters["products/getProduct"]),
 
     // ACTIONS

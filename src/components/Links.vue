@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <router-link :to="{ name: 'products' }">Listado de productos</router-link> |
+    <router-link :to="{ path: '/products' }">Listado de productos</router-link> |
     <router-link :to="{ name: 'profile' }">Perfil</router-link> |
     <a href="../App.vue" class="button"> 🔓 Logout</a>
   </nav>

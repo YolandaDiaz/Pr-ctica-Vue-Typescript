@@ -1,7 +1,7 @@
 <template>
   <Links></Links>
   <HelloWorld msg="Detalle del producto" />
-  <detailCard>
+  <DetailCard>
     <template v-slot:header>
       <h2 class="card-title">Producto: {{ product.title }}</h2>
     </template>
@@ -18,22 +18,27 @@
     <template v-slot:footer>
       <h2>Precio: {{ product.price }} €</h2>
     </template>
-  </detailCard>
+  </DetailCard>
+  <div>
+    <FooterGracias></FooterGracias>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import HelloWorld from "@/components/HelloWorld.vue";
 import Links from "@/components/Links.vue";
+import FooterGracias from "@/components/FooterGracias.vue";
 import useProducts from "@/composables/useProducts";
-import detailCard from "@/components/detailCard.vue";
+import DetailCard from "@/components/DetailCard.vue";
 
 export default defineComponent({
   name: "DetailView",
   components: {
     HelloWorld,
     Links,
-    detailCard,
+    DetailCard,
+    FooterGracias,
   },
   props: {
     id: {

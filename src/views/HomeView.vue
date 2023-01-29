@@ -4,8 +4,8 @@
   </div>
   <div class="login">
     <h3>Lógate para acceder a la tienda</h3>
-    <form action="" class="form">
-      <label class="form-label" for="#email">Email:</label>
+    <form action="post" class="form" v-on:submit.prevent="goLogin">
+      <label class="form-label" for="email">Email:</label>
       <input
         v-model="email"
         class="form-input"
@@ -14,7 +14,7 @@
         required
         placeholder="Introduce tu email"
       />
-      <label class="form-label" for="#password">Password:</label>
+      <label class="form-label" for="password">Password:</label>
       <input
         v-model="password"
         class="form-input"
@@ -23,45 +23,57 @@
         required
         placeholder="Introduce tu contraseña"
       />
-      <input class="form-submit" type="submit" value="Acceder" @goLogin="goLogin" />
+      <input class="form-submit" type="submit" value="Acceder" />
     </form>
+    <div class="error" v-if="error">
+      "El email introducido o la contraseña no son correctos. Se ha producido el siguiente
+      error:"{{ errormsg }}
+    </div>
+  </div>
+  <div>
+    <FooterGracias></FooterGracias>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent } from "vue";
 import HelloWorld from "@/components/HelloWorld.vue";
-import { useRouter } from "vue-router";
-import { User } from "@/models/user";
-import useUsers from "@/composables/useUsers";
+import FooterGracias from "@/components/FooterGracias.vue";
+import axios from "axios";
+import router from "@/router";
 
 export default defineComponent({
   name: "HomeView",
   components: {
     HelloWorld,
+    FooterGracias,
   },
-  props: {
-    id: {
-      type: Number,
-      required: true,
-    },
-    userRole: String,
-  },
-
-  setup() {
-    const { users} = useUsers();
-    const router = useRouter();
-    const email = ref<string>("");
-    const password = ref<string>("");
-    //fetchUsers();
-    
+  data: function () {
     return {
-      users,
-      email,
-      password,
-      goLogin: (user: User) =>
-        router.push({ name: "profile", params: { iduser: user.id } }),
+      email: "",
+      password: "",
+      error: false,
+      errormsg: "",
     };
+  },
+  methods: {
+    async goLogin() {
+      let json = {
+        email: this.email,
+        password: this.password,
+      };
+      try {
+        const response = await axios.post(
+          "https://api.escuelajs.co/api/v1/auth/login",
+          json
+        );
+        localStorage.setItem("accessToken", response.data.access_token);
+        router.push({ name: "profile" });
+      } catch (err) {
+        this.error = true;
+        this.errormsg = `${err}`;
+      }
+    },
   },
 });
 </script>

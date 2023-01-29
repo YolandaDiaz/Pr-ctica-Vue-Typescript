@@ -6,6 +6,9 @@ const mutations: MutationTree<IProductsState> = {
   setProducts (state: IProductsState, products: Product[]) {
     state.products = products;
   },
+  setSearchedProducts (state: IProductsState, searchedProducts: Product[]) {
+    state.searchedProducts = searchedProducts;
+  },
   //setIsLoading(state: IProductsState, value: boolean) {
   //  state.isLoading = value;
   //},
